@@ -1,0 +1,35 @@
+name: tests
+
+# The worked example lives in doctests, and two tests read the README table and
+# the explainer page's constants back out of the files. This workflow is what makes
+# that binding: if a figure in the prose ever stops matching what the code returns,
+# the build goes red.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# The job only reads the checkout. Saying so here keeps it true even if the
+# repository default ever changes.
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install -e ".[test]"
+      - run: pytest -q

@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.DS_Store
+.env
+
+# A library with no runtime dependencies has nothing to lock. uv writes one anyway
+# when it runs the tests; it is noise here, not reproducibility.
+uv.lock
