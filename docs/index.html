@@ -3,292 +3,267 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Why doesn't an intelligent person correct themselves?</title>
+<title>The acceptance gate, in one calculation</title>
 <style>
+/* GitHub's dark palette, so the page looks like the place it lives in.
+   Deliberately plain: this is documentation, not a product page. */
 :root{
-  --bg:#0D0D14; --card:#1A1130; --border:#3B2A6B; --text:#E6E1E5; --muted:#A8A3B8;
-  --h1:#FFFFFF; --h2:#E791C9; --link:#A8C7FA; --badge:#9D7BE8;
-  --tagbg:#2A1F4D; --gruen:#5FB88A; --rot:#C77B72; --blau:#7BA3D0;
+  --bg:#0d1117; --karte:#161b22; --rand:#30363d; --rand-hell:#21262d;
+  --text:#e6edf3; --leise:#8b949e; --link:#4493f8;
+  --gruen:#3fb950; --rot:#f85149; --gelb:#d29922; --blau:#58a6ff;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);
-  font-family:"Segoe UI",system-ui,sans-serif;line-height:1.75;font-size:16px}
-.wrap{max-width:750px;margin:0 auto;padding:0 22px 30px}
-.breit{max-width:980px;margin:0 auto;padding:0 22px}
-.hinweisleiste{background:#241845;border-bottom:1px solid var(--border);padding:11px 22px;
-  font-size:13px;color:var(--muted);text-align:center}
-h1{color:var(--h1);font-size:38px;line-height:1.25;margin:54px 0 10px;font-weight:700}
-h2{color:var(--h2);font-size:24px;margin:54px 0 14px}
-h3{color:var(--h1);font-size:18px;margin:28px 0 8px}
-p{margin:15px 0}
-.gross{font-size:19px}
-.muted{color:var(--muted)}
-.untertitel{color:var(--muted);font-size:17px;margin:0 0 34px}
-.karte{background:var(--card);border:1px solid var(--border);border-radius:12px;
-  padding:22px 26px;margin:26px 0}
-.zitat{border-left:3px solid var(--h2);padding:6px 0 6px 20px;margin:24px 0;color:var(--muted);
-  font-style:italic}
-.zitat b{color:var(--text);font-style:normal}
-code{background:var(--tagbg);padding:1px 6px;border-radius:5px;font-size:14px;
-  font-family:Consolas,monospace}
-pre{background:#12101C;border:1px solid var(--border);border-radius:10px;padding:16px 18px;
-  overflow-x:auto;font-size:13.5px;font-family:Consolas,monospace;line-height:1.6}
-pre .kom{color:var(--muted)} pre .schl{color:#C9A0F0} pre .txt{color:#9BD8B0}
-a{color:var(--link)}
-.klein{font-size:13px;color:var(--muted)}
-.quellen{font-size:12.5px;color:var(--muted);line-height:1.65}
-.quellen b{color:var(--text)}
-.fuss{color:var(--muted);font-size:13px;text-align:center;margin-top:60px;
-  border-top:1px solid var(--border);padding-top:22px}
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.6}
+.spalte{max-width:800px;margin:0 auto;padding:0 24px 64px}
+.breit{max-width:1000px;margin:0 auto;padding:0 24px}
 
-.bedingungen{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:26px 0}
-@media(max-width:700px){.bedingungen{grid-template-columns:1fr}}
-.bed{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
-.bed .nr{font-size:12px;color:var(--badge);letter-spacing:1.5px;text-transform:uppercase}
-.bed .name{font-size:19px;color:var(--h1);margin:5px 0 8px;font-weight:600}
-.bed .was{font-size:14px;color:var(--muted);line-height:1.6}
-.bed .beleg{font-size:11.5px;color:var(--muted);margin-top:10px;padding-top:8px;
-  border-top:1px solid var(--border);font-style:italic}
-.bed.mitte{border-color:var(--h2);background:#221540}
-.bed.mitte .name{color:var(--h2)}
-.neu{display:inline-block;background:#3A1F4D;color:var(--h2);font-size:11px;border-radius:10px;
-  padding:1px 9px;margin-left:7px;vertical-align:middle;font-weight:600}
+.kopfleiste{border-bottom:1px solid var(--rand);padding:12px 0;margin-bottom:8px;font-size:13px;color:var(--leise)}
+.kopfleiste .spalte{padding-bottom:0}
+h1{font-size:30px;font-weight:600;margin:28px 0 6px;line-height:1.3}
+h2{font-size:22px;font-weight:600;margin:40px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--rand)}
+h3{font-size:16px;font-weight:600;margin:22px 0 6px}
+p{margin:12px 0}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+.leise{color:var(--leise)}
+.klein{font-size:13.5px;color:var(--leise)}
+.untertitel{color:var(--leise);font-size:17px;margin:0 0 26px}
 
-.buehne{background:var(--card);border:1px solid var(--border);border-radius:12px;
-  padding:24px 26px;margin:26px 0}
-.szenen{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
-/* The two scenes stay side by side even on a phone. The whole point is the comparison
-   in one glance; stacked, you only ever see half of it while dragging the slider. */
+.hinweis{background:var(--karte);border:1px solid var(--rand);border-left:3px solid var(--blau);
+  border-radius:6px;padding:12px 16px;margin:18px 0;font-size:14.5px}
+.karte{background:var(--karte);border:1px solid var(--rand);border-radius:6px;padding:16px 18px;margin:16px 0}
+
+code{background:rgba(110,118,129,0.4);padding:2px 6px;border-radius:6px;font-size:13px;
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Consolas,"Liberation Mono",monospace}
+pre{background:var(--karte);border:1px solid var(--rand);border-radius:6px;padding:14px 16px;
+  overflow-x:auto;font-size:13px;line-height:1.5;
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Consolas,"Liberation Mono",monospace}
+pre .kom{color:var(--leise)} pre .schl{color:#ff7b72} pre .txt{color:#a5d6ff} pre .fn{color:#d2a8ff}
+
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14.5px}
+th{background:var(--karte);text-align:left;padding:7px 12px;border:1px solid var(--rand);font-weight:600}
+td{padding:7px 12px;border:1px solid var(--rand);vertical-align:top}
+
+/* Die drei Bedingungen: bewusst als schlichte Liste, nicht als drei gleich grosse
+   Kacheln nebeneinander. Sie sind nicht gleichrangig, die mittlere traegt den Beitrag. */
+.bedingung{border-left:2px solid var(--rand);padding:2px 0 2px 16px;margin:18px 0}
+.bedingung.mitte{border-left-color:var(--gelb)}
+.bedingung .name{font-weight:600;font-size:16px}
+.bedingung .nr{color:var(--leise);font-size:13px;font-weight:400;margin-left:6px}
+.bedingung .beleg{font-size:13px;color:var(--leise);margin-top:4px}
+
+.buehne{background:var(--karte);border:1px solid var(--rand);border-radius:6px;padding:18px 20px;margin:20px 0}
+.reglerzeile{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.reglerzeile label{font-size:14.5px;white-space:nowrap}
+input[type=range]{flex:1;min-width:220px;accent-color:var(--blau);height:20px}
+.wert{color:var(--blau);font-family:ui-monospace,Consolas,monospace;font-size:14px;min-width:88px}
+.knopf{background:#21262d;color:var(--text);border:1px solid var(--rand);border-radius:6px;
+  padding:5px 14px;font-size:13.5px;cursor:pointer;font-family:inherit}
+.knopf:hover{background:#30363d}
+
+.szenen{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:640px){.szenen{gap:8px}}
+.szene{border:1px solid var(--rand);border-radius:6px;padding:12px 14px;background:var(--bg)}
+.szene .ort{font-weight:600;font-size:14.5px}
+.szene .zeit{color:var(--leise);font-size:12px;font-family:ui-monospace,Consolas,monospace}
+.szene .satz{font-size:13px;color:var(--leise);min-height:52px;margin:6px 0 10px;line-height:1.45}
+.zeile{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12.5px}
+.zeile .lab{width:74px;color:var(--leise);flex-shrink:0}
+.zeile .schiene{flex:1;height:6px;background:#21262d;border-radius:3px;overflow:hidden}
+.zeile .fuell{height:100%;background:var(--leise);transition:width .25s ease}
+.zeile.acc .fuell{background:var(--gelb)}
+.zeile .zahl{width:38px;text-align:right;font-family:ui-monospace,Consolas,monospace}
+.ergebnis{margin-top:10px;padding-top:9px;border-top:1px solid var(--rand);display:flex;
+  align-items:baseline;justify-content:space-between}
+.ergebnis .zahl{font-size:22px;font-family:ui-monospace,Consolas,monospace}
+.ergebnis .lab{font-size:12px;color:var(--leise)}
+.ergebnis .fak{font-size:12px;color:var(--blau);font-family:ui-monospace,Consolas,monospace}
 @media(max-width:620px){
-  .szene{padding:11px 10px}
-  .szene .ort{font-size:14px}
-  .szene .satz{font-size:11.5px;min-height:74px}
-  .zeile{font-size:10.5px;gap:5px}
-  .zeile .lab{width:58px}
-  .zeile .zahl{width:30px}
-  .ergebnis .zahl{font-size:23px}
-  .szenen{gap:9px}
+  .szene{padding:9px 10px} .szene .satz{font-size:11.5px;min-height:66px}
+  .zeile{font-size:11px;gap:5px} .zeile .lab{width:56px} .zeile .zahl{width:30px}
+  .ergebnis .zahl{font-size:18px}
 }
-.szene{background:#12101C;border:1px solid var(--border);border-radius:10px;padding:16px 18px}
-.szene .uhr{font-size:12px;color:var(--badge);letter-spacing:1px;text-transform:uppercase}
-.szene .ort{font-size:17px;color:var(--h1);margin:3px 0 2px;font-weight:600}
-.szene .satz{font-size:13px;color:var(--muted);min-height:56px;line-height:1.5;margin-bottom:12px}
-.zeile{display:flex;align-items:center;gap:9px;margin:6px 0;font-size:12.5px}
-.zeile .lab{width:88px;color:var(--muted);flex-shrink:0}
-.zeile .schiene{flex:1;height:13px;background:#0A0812;border-radius:4px;overflow:hidden;
-  border:1px solid var(--border)}
-.zeile .fuell{height:100%;transition:width .3s ease}
-.f1{background:var(--blau)} .f2{background:var(--rot)} .f3{background:var(--gruen)}
-.zeile .zahl{width:46px;text-align:right;font-family:Consolas,monospace}
-.ergebnis{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);text-align:center}
-.ergebnis .zahl{font-size:31px;font-family:Consolas,monospace;color:var(--h1);line-height:1.2}
-.ergebnis .lab{font-size:12px;color:var(--muted)}
-.ergebnis .fak{font-size:12.5px;color:var(--badge);margin-top:5px;font-family:Consolas,monospace}
-.reglerkasten{margin:4px 0 0;padding:16px 18px;background:#12101C;border:1px solid var(--border);
-  border-radius:10px}
-.reglerkasten label{display:block;font-size:15px;margin-bottom:7px}
-.reglerkasten .wert{float:right;color:var(--badge);font-family:Consolas,monospace}
-input[type=range]{width:100%;accent-color:#9D7BE8;height:24px}
-.knopf{background:var(--tagbg);color:var(--text);border:1px solid var(--border);border-radius:8px;
-  padding:10px 18px;font-size:14px;cursor:pointer;font-family:inherit;margin-top:12px}
-.knopf:hover{background:#3A2A5D}
-.aufloesung{background:#1D1435;border-left:3px solid var(--h2);border-radius:0 10px 10px 0;
-  padding:16px 20px;margin:20px 0 0;font-size:15px;min-height:74px}
-.aufloesung b{color:var(--h2)}
+.deutung{border:1px solid var(--rand);border-left:3px solid var(--gelb);border-radius:6px;
+  padding:12px 16px;margin-top:14px;font-size:14px;min-height:62px;background:var(--bg)}
+
+.fuss{border-top:1px solid var(--rand);margin-top:56px;padding-top:18px;font-size:13px;color:var(--leise)}
+@media print{body{background:#fff;color:#111} .karte,.szene,.buehne,pre,th{background:#fff}}
 </style>
 </head>
 <body>
 
-<div class="hinweisleiste">
-  Companion page to <a href="https://github.com/RealNevoEvo/acceptance-gate">acceptance-gate</a>.
-  The constants and results below are read out of this page by a test and held against the package.
-</div>
+<div class="kopfleiste"><div class="spalte">
+  <a href="https://github.com/RealNevoEvo/acceptance-gate">RealNevoEvo / acceptance-gate</a>
+  &nbsp;·&nbsp; explainer page. The constants and the printed results below are read out of this
+  file by a test and compared with the package.
+</div></div>
 
-<div class="wrap">
+<div class="spalte">
 
-<h1>Why doesn&rsquo;t an intelligent person correct themselves?</h1>
-<p class="untertitel">An answer you can follow through a calculation.</p>
+<h1>The acceptance gate, in one calculation</h1>
+<p class="untertitel">Companion page to the manuscript. It takes about five minutes and there is a
+slider halfway down.</p>
 
-<div class="karte">
-<h3 style="margin-top:0">One surgeon, one day</h3>
+<h2>A surgeon, one day</h2>
+
 <p>At nine in the morning she is in an operating theatre. A junior colleague tells her that her
 incision is wrong. She stops, looks, says &ldquo;you are right,&rdquo; and changes what she is
 doing.</p>
+
 <p>Six hours later her husband says almost the same words: she is being unfair to their daughter.
-<b>She does not stop.</b> She explains why he is mistaken, then why he has always been mistaken,
-and the evening ends where such evenings end.</p>
-<p style="margin-bottom:0"><b>Nothing about her intelligence changed between the two scenes.
-Nothing about her capacity for effortful thought changed.</b> What changed was whether the truth
-was allowed in.</p>
+This time she does not stop. She explains why he is mistaken, and then why he has always been
+mistaken.</p>
+
+<p>Her intelligence did not change between those two scenes, and neither did her capacity for
+effort. What changed was whether the correction was allowed in.</p>
+
+<p>The usual explanations do not fit. Stubbornness would have shown up in the morning too. Slowness
+is not the issue. And it is not two different people.</p>
+
+<h2>Three conditions</h2>
+
+<p>The proposal is that acting against your own strongest habit requires three things at once, and
+that each of them caps the result on its own. They are not stages you pass through in order.</p>
+
+<div class="bedingung">
+  <div class="name">Noticing<span class="nr">condition 1</span></div>
+  <div>The discrepancy has to arrive, and strongly enough to argue against what was expected.</div>
+  <div class="beleg">Well studied. Error signals in the brain, the ERN and the Pe.</div>
 </div>
 
-<p class="gross">The usual explanations do not survive this. She is not stubborn, or she would have
-been stubborn in the morning. She is certainly not slow. And these are not two different people; it
-is the same woman, six hours apart.</p>
-
-<p>What follows proposes that between noticing and acting there is something rarely treated as a
-thing of its own: <b>whether a truth about oneself is let in</b>. Not whether it is understood.
-Whether it is allowed to be true of you.</p>
-
-<h2>Three conditions, and it hangs on all three</h2>
-
-<p>For a person to act against their strongest habit, three things must hold at once. They are not
-stages traversed in order, but <b>requirements that have to be met together</b>. Each one sets a
-ceiling on the outcome.</p>
-
-<div class="bedingungen">
-  <div class="bed">
-    <div class="nr">Condition 1</div>
-    <div class="name">Noticing</div>
-    <div class="was">The discrepancy has to arrive at all, and strongly enough to argue against
-    what was expected.</div>
-    <div class="beleg">Well studied: error signals in the brain, the ERN and the Pe.</div>
-  </div>
-  <div class="bed mitte">
-    <div class="nr">Condition 2</div>
-    <div class="name">Accepting<span class="neu">the contribution</span></div>
-    <div class="was">It has to be allowed to hold <b>of oneself</b>. Not understood, not conceded
-    in general, but in this case, about this person, now.</div>
-    <div class="beleg">The building blocks exist: what self-worth is staked on, and what it costs
-    to be struck there.</div>
-  </div>
-  <div class="bed">
-    <div class="nr">Condition 3</div>
-    <div class="name">Overriding</div>
-    <div class="was">The new intention has to outvote the practised one. That has a price, and the
-    price is not always worth paying.</div>
-    <div class="beleg">Well studied: the expected value of control.</div>
-  </div>
+<div class="bedingung mitte">
+  <div class="name">Accepting<span class="nr">condition 2, the contribution</span></div>
+  <div>It has to be allowed to hold <em>of oneself</em>. Not understood in general terms, but in
+  this case, about this person, now.</div>
+  <div class="beleg">The building blocks exist: what self-worth is staked on, and what it costs to
+  be struck there. What is new is treating this as a condition of its own.</div>
 </div>
 
-<div class="zitat">
-<b>What is new here, and what is not.</b> All three building blocks are established and studied
-separately. What is claimed as new is the wiring: that the middle condition is one of its own,
-that it does not reduce to understanding, and that the three <b>cannot substitute for one
-another</b>.
+<div class="bedingung">
+  <div class="name">Overriding<span class="nr">condition 3</span></div>
+  <div>The new intention has to outvote the practised one, and that has a price which is not always
+  worth paying.</div>
+  <div class="beleg">Well studied. The expected value of control.</div>
 </div>
 
-<h2>The objection</h2>
-<p>It is the obvious one: <i>this is just another word for intelligence. People who can do more
-correct themselves more often.</i> If that holds, raising ability should shrink the difference
-between morning and afternoon. Let us look.</p>
+<p>All three building blocks are established and have been studied separately. The claim is about
+the wiring, not about the parts.</p>
+
+<h2>The obvious objection</h2>
+
+<p>It is this: the middle condition is just another name for intelligence, and people who can do
+more correct themselves more often. If that were right, raising someone's ability should shrink the
+gap between morning and afternoon.</p>
+
+<p>The display below lets you try it. The slider changes one thing only, how far ahead she can
+project consequences, and that quantity enters the third condition. It does not touch the first two.</p>
 
 </div>
 
 <div class="breit">
 <div class="buehne">
-  <h3 style="margin-top:0">The same woman, the same day, the same gifts</h3>
-  <p class="klein" style="margin-top:4px">Below are the three conditions in both scenes.
-  <b>Noticing and overriding are identical</b>, since it is the same head. Only acceptance differs,
-  because in the afternoon something else is at stake.</p>
-
-  <div class="reglerkasten">
-    <label for="r-p">Her ability to forecast the consequences
-      <span class="wert" id="w-p">low</span></label>
+  <div class="reglerzeile">
+    <label for="r-p">Ability to forecast consequences</label>
     <input type="range" id="r-p" min="0.5" max="4" step="0.05" value="0.5" oninput="compute()"
       aria-describedby="w-p">
-    <p class="klein" style="margin:8px 0 0">This ability enters <b>condition 3</b>, and it enters
-    <i>quadratically</i>: the further ahead you can see, the more the effort is worth spending. It
-    does not touch noticing, and it does not touch accepting.</p>
+    <span class="wert" id="w-p">low</span>
     <button class="knopf" onclick="demonstrate()">Raise it slowly</button>
   </div>
+  <p class="klein" style="margin:4px 0 0">Both scenes get the same head: noticing and overriding are
+  identical on the left and the right. Only what is at stake differs.</p>
 
   <div class="szenen">
     <div class="szene">
-      <div class="uhr">9 AM</div>
-      <div class="ort">In the operating theatre</div>
-      <div class="satz">&ldquo;Your incision is wrong.&rdquo; Unpleasant, but it does not shake who
+      <div class="zeit">09:00</div>
+      <div class="ort">Operating theatre</div>
+      <div class="satz">&ldquo;Your incision is wrong.&rdquo; Unpleasant, but it does not touch who
       she is.</div>
       <div class="zeile"><span class="lab">Noticing</span>
-        <span class="schiene"><span class="fuell f1" id="b1a"></span></span>
+        <span class="schiene"><span class="fuell" id="b1a"></span></span>
         <span class="zahl" id="z1a">0.00</span></div>
-      <div class="zeile"><span class="lab">Accepting</span>
-        <span class="schiene"><span class="fuell f2" id="b2a"></span></span>
+      <div class="zeile acc"><span class="lab">Accepting</span>
+        <span class="schiene"><span class="fuell" id="b2a"></span></span>
         <span class="zahl" id="z2a">0.00</span></div>
       <div class="zeile"><span class="lab">Overriding</span>
-        <span class="schiene"><span class="fuell f3" id="b3a"></span></span>
+        <span class="schiene"><span class="fuell" id="b3a"></span></span>
         <span class="zahl" id="z3a">0.00</span></div>
       <div class="ergebnis">
-        <div class="zahl" id="erg-a">0.000</div>
-        <div class="lab">Capacity to act</div>
-        <div class="fak" id="fak-a">&nbsp;</div>
+        <span><span class="zahl" id="erg-a">0.000</span>
+        <span class="lab">capacity to act</span></span>
+        <span class="fak" id="fak-a">&nbsp;</span>
       </div>
     </div>
 
     <div class="szene">
-      <div class="uhr">3 PM</div>
+      <div class="zeit">15:00</div>
       <div class="ort">At home</div>
-      <div class="satz">&ldquo;You are being unfair to her.&rdquo; Almost the same sentence. Only
-      this time it lands exactly where her worth rests.</div>
+      <div class="satz">&ldquo;You are being unfair to her.&rdquo; Almost the same sentence, but it
+      lands where her worth rests.</div>
       <div class="zeile"><span class="lab">Noticing</span>
-        <span class="schiene"><span class="fuell f1" id="b1b"></span></span>
+        <span class="schiene"><span class="fuell" id="b1b"></span></span>
         <span class="zahl" id="z1b">0.00</span></div>
-      <div class="zeile"><span class="lab">Accepting</span>
-        <span class="schiene"><span class="fuell f2" id="b2b"></span></span>
+      <div class="zeile acc"><span class="lab">Accepting</span>
+        <span class="schiene"><span class="fuell" id="b2b"></span></span>
         <span class="zahl" id="z2b">0.00</span></div>
       <div class="zeile"><span class="lab">Overriding</span>
-        <span class="schiene"><span class="fuell f3" id="b3b"></span></span>
+        <span class="schiene"><span class="fuell" id="b3b"></span></span>
         <span class="zahl" id="z3b">0.00</span></div>
       <div class="ergebnis">
-        <div class="zahl" id="erg-b">0.000</div>
-        <div class="lab">Capacity to act</div>
-        <div class="fak" id="fak-b">&nbsp;</div>
+        <span><span class="zahl" id="erg-b">0.000</span>
+        <span class="lab">capacity to act</span></span>
+        <span class="fak" id="fak-b">&nbsp;</span>
       </div>
     </div>
   </div>
 
-  <div class="aufloesung" id="reading" aria-live="polite">
-    Drag the slider to the right and watch the two bottom rows.
-  </div>
+  <div class="deutung" id="reading">Drag the slider to the right and watch the bottom row of each
+  scene.</div>
 </div>
 </div>
 
-<div class="wrap">
+<div class="spalte">
 
-<h2>What just happened</h2>
+<h2>What that shows, and what it does not</h2>
 
-<p>Her ability worked in <b>both</b> scenes, and by <b>exactly the same factor</b>. That is not an
-approximation: acceptance cancels out of the ratio, because the slider never touches it. The gain
-is necessarily identical in both.</p>
+<p>Her ability works in both scenes and by the same factor. That is not an approximation: the
+slider never touches acceptance, so it cancels when you divide one autonomy by the other.</p>
 
-<p>And yet she ends up high on one side and near the floor on the other. <b>Nothing on the right is
-blocked and nothing is broken.</b> That value rose too, by the same factor. It rose under a
-ceiling.</p>
+<p>She still ends up high on one side and near the floor on the other. Nothing on the right is
+broken. That number rose too, by the same factor, but it rose under a ceiling.</p>
 
-<div class="zitat">
-<b>That is the whole claim.</b> Ability is not a shortcut past this point. It multiplies whatever
-gets through. When little gets through, it multiplies little.
+<div class="hinweis">
+<b>A caution about the constant factor.</b> It is easy to present it as the result, and an earlier
+version of this page did. It is not one. Take logarithms of a product and it becomes a sum, so a
+constant ratio survives any rescaling of the outcome and settles nothing. What the manuscript
+preregisters is the <b>absolute</b> gain: the distance between the two numbers at the bottom of a
+scene. On the left that distance is large. On the right it is almost nothing.
 </div>
 
-<p>From which something testable follows. A highly able person whose self-worth is staked on a
-domain should collapse there instead of spending ability as compensation. An account in which the
-three conditions add up predicts the opposite: that the large ability makes up for the small
-acceptance.</p>
+<p>The testable consequence is about that absolute gain. A very able person whose self-worth is
+staked on some domain should collapse there rather than spend ability as compensation. An account
+in which the three conditions add up predicts the opposite.</p>
 
-<p class="klein">One caution about what you just watched, because it matters. The factor is the
-same on both sides by construction, since the slider does not touch acceptance, and a constant
-factor of that kind can be produced by rescaling; on its own it decides nothing. What the
-manuscript puts forward for testing is the <b>absolute</b> gain, the actual distance between the
-two numbers at the bottom of each scene. On the left it is large, on the right it is almost
-nothing. Deciding between the two accounts also needs the rival fitted to the same data, and that
-is a study, not a slider.</p>
+<p>Deciding between the two accounts needs the rival account fitted to the same data, which is a
+study rather than a slider. The repository does not contain that rival yet.</p>
 
 <h2>The calculation</h2>
 
-<p>The core is a product. Three conditions multiplied rather than added, so that none can replace
-another:</p>
+<p>The core is a product of three numbers, so that none of them can stand in for another:</p>
 
 <pre><span class="schl">from</span> math <span class="schl">import</span> exp
 
-<span class="schl">def</span> sigmoid(x):
+<span class="schl">def</span> <span class="fn">sigmoid</span>(x):
     <span class="schl">return</span> 1 / (1 + exp(-x))
 
-<span class="schl">def</span> autonomy(detection, acceptance, override):
+<span class="schl">def</span> <span class="fn">autonomy</span>(detection, acceptance, override):
     <span class="txt">"""How far a person can act against their strongest schema."""</span>
     <span class="schl">return</span> detection * acceptance * override</pre>
 
-<p>And here is the case the manuscript works through: an able man with an excellent error detector
-and formidable modelling ability, whose self-worth is staked on exactly this domain.</p>
+<p>The case the manuscript works through is an able man with an excellent error detector and
+formidable modelling ability, meeting a criticism that lands exactly where his self-worth is
+staked:</p>
 
 <pre>&gt;&gt;&gt; round(autonomy(sigmoid(2), sigmoid(-3), sigmoid(2)), 4)
 0.0368
@@ -296,26 +271,24 @@ and formidable modelling ability, whose self-worth is staked on exactly this dom
 &gt;&gt;&gt; round(autonomy(0.5, sigmoid(-3), 0.5), 4)
 0.0119
 
-<span class="kom"># His two great faculties tripled the result.
-# It is still three hundredths.</span></pre>
+<span class="kom"># His two faculties tripled the result. It is still three hundredths.</span></pre>
 
-<p class="klein">These figures come from the full logistic values, not from rounded intermediates;
-chaining rounded numbers is itself a way to get a worked example wrong. Units are arbitrary and
-illustrative: they demonstrate an ordering, not a measurement, and none of them should be quoted as
-measured values. The same holds for the figures in the display above.</p>
+<p class="klein">These come from the full logistic values. Rounding the inputs first gives a
+different answer, which is one way to get a worked example wrong. Units are arbitrary and
+illustrative throughout: they show an ordering, not a measurement, and none of them should be
+quoted as a measured value. The same holds for the numbers in the display above.</p>
 
-<h2>What would refute this</h2>
+<h2>What would refute it</h2>
 
-<p>The manuscript names three forms the test can take and three patterns that would sink the
-model. The one it leans on: where acceptance is low, the effect of forecasting depth on the
-outcome should fall below what a study of that size could detect, rather than merely shrink. If it
-merely shrinks, the conditions are trading off, and the architecture is wrong.</p>
+<p>The manuscript names three forms the test can take and three patterns that would sink the model.
+The one it leans on: where acceptance is low, the effect of forecasting depth should fall below what
+a study of that size could detect. If it merely shrinks, the conditions are trading off and the
+architecture is wrong.</p>
 
-<p>Before any of that, one thing has to hold that is easy to overlook. The three conditions must
-be measurable separately, without using the outcome to do it. If acceptance is recognised by the
-fact that someone changed their behaviour, nothing has been explained, only renamed. That is a
-question about measurement rather than about the model, and the manuscript treats it in its own
-appendix.</p>
+<p>Before any of that, something else has to hold, and it is easy to overlook. The three conditions
+must be measurable separately, without using the outcome to do it. If acceptance is recognised by
+the fact that someone changed their behaviour, nothing has been explained, only renamed. That is a
+question about measurement, and the manuscript treats it in an appendix of its own.</p>
 
 <h2>Where this comes from</h2>
 
@@ -324,22 +297,18 @@ Against One&rsquo;s Strongest Schema</i> by <b>Nevzat Subasioglu</b>, independen
 Switzerland. The manuscript carries the derivation, the demarcation against existing models, and a
 proposal for how the matter could be settled experimentally.</p>
 
-<p class="gross" style="margin-top:26px">The question worth asking about a person is not how clever
-they are or how hard they try, but a third one we have not been asking: <b>what would it cost them
-to be wrong?</b></p>
-
-<h2>What this builds on</h2>
-<div class="quellen">
-<p><b>Noticing:</b> Nieuwenhuis et al. (2001) on error monitoring without awareness; O&rsquo;Connell
-et al. (2007) and Steinhauser &amp; Yeung (2010) on the error positivity.</p>
-<p><b>Accepting:</b> Crocker &amp; Wolfe (2001), <i>Contingencies of Self-Worth</i>, Psychological
+<table>
+<tr><th style="width:24%">Condition</th><th>Builds on</th></tr>
+<tr><td>Noticing</td><td>Nieuwenhuis et al. (2001) on error monitoring without awareness; O&rsquo;Connell
+et al. (2007) and Steinhauser &amp; Yeung (2010) on the error positivity</td></tr>
+<tr><td>Accepting</td><td>Crocker &amp; Wolfe (2001), <i>Contingencies of Self-Worth</i>, Psychological
 Review; Kernis (2003) on non-contingent self-esteem; Leary et al. (2007) on taking responsibility
-without self-blame.</p>
-<p><b>Overriding:</b> Shenhav, Botvinick &amp; Cohen (2013), <i>The Expected Value of Control</i>,
-Neuron. Control lapses because its value falls, not because a tank runs dry.</p>
-<p><b>Testing a ceiling:</b> Dul (2016), <i>Necessary Condition Analysis</i>, Organizational
-Research Methods.</p>
-</div>
+without self-blame</td></tr>
+<tr><td>Overriding</td><td>Shenhav, Botvinick &amp; Cohen (2013), <i>The Expected Value of Control</i>,
+Neuron. Control lapses because its value falls, not because a tank runs dry</td></tr>
+<tr><td>Testing a ceiling</td><td>Dul (2016), <i>Necessary Condition Analysis</i>, Organizational
+Research Methods</td></tr>
+</table>
 
 <div class="fuss">
 <a href="https://github.com/RealNevoEvo/acceptance-gate">acceptance-gate</a> ·
@@ -349,15 +318,14 @@ MIT licensed · cite via <code>CITATION.cff</code>
 </div>
 
 <script>
-/* The calculation is the one from the manuscript, with no intermediate rounding:
+/* The calculation is the manuscript's, with no intermediate rounding:
      A = sig(Z - S1) · Acc · sig(P²/4c - S2 - r·dt)
-   Noticing and accepting are fixed, because this is the same woman on one day.
-   The slider moves P alone, and P enters quadratically. No randomness, no threshold,
-   no sample: what you see is the value of the function.
+   Noticing and accepting are fixed, since this is one woman on one day. The slider
+   moves P alone, and P enters quadratically.
 
    The constants below are the surgeon's parameters from vignettes.py. A test reads
-   them out of this file and holds them against the package, so this page and the
-   code cannot drift apart without the build going red.                             */
+   them out of this file and holds them against the package, so the page and the code
+   cannot drift apart without the build going red. */
 const sig = x => 1 / (1 + Math.exp(-x));
 
 const DETECTION   = sig(2);     // her error signal, identical in both scenes
@@ -368,8 +336,7 @@ const P_MIN = 0.5;
 
 const overriding = P => sig(Math.max(P, 0)*Math.max(P, 0)/(4*C) - S2 - R_DT);
 
-/* Reference point for the factor: the left end of the slider. Named in the text so the
-   number does not look larger than it is.                                             */
+/* Reference point for the factor: the left end of the slider. */
 const BASE_THEATRE = DETECTION * ACC_THEATRE * overriding(P_MIN);
 const BASE_HOME    = DETECTION * ACC_HOME    * overriding(P_MIN);
 
@@ -388,7 +355,7 @@ function paint(side, acc, P, base){
   document.getElementById("erg-"+side).textContent = three(a);
   const f = a / base;
   document.getElementById("fak-"+side).textContent =
-    f > 1.005 ? (f.toFixed(2) + "x since the start") : " ";
+    f > 1.005 ? ("x" + f.toFixed(2) + " since the start") : " ";
   return { a: a, f: f };
 }
 
@@ -410,18 +377,17 @@ function describe(P){
 function interpret(P, theatre, home){
   const box = document.getElementById("reading");
   if (P < 2.4){
-    box.innerHTML = "Drag the slider further right and watch the two bottom rows.";
+    box.innerHTML = "Drag further right and watch the bottom row of each scene.";
     return;
   }
-  /* Both factors are identical by construction. They are therefore stated ONCE rather
-     than printed twice: two rounded numbers would occasionally differ in the last digit
-     and contradict the sentence they are meant to support.                            */
+  /* Both factors are identical by construction, so they are stated once. Printing two
+     rounded numbers would occasionally differ in the last digit and contradict the
+     sentence they are meant to support. */
   const f = ((theatre.f + home.f) / 2).toFixed(2);
-  box.innerHTML = "<b>Both scenes gained by a factor of " + f + ".</b> The same woman, the same "
-    + "gifts, the same gain. And she still ends the morning at " + three(theatre.a)
-    + " and the afternoon at " + three(home.a) + ".<br><br>"
-    + "Nothing is blocked in the afternoon: that value rose by the same " + f + "x. "
-    + "<b>It rose under a ceiling.</b> " + f + " times almost nothing is almost nothing.";
+  box.innerHTML = "Both scenes gained by the same factor, " + f + ". She ends the morning at "
+    + three(theatre.a) + " and the afternoon at " + three(home.a) + ". Nothing is blocked on the "
+    + "right, that value rose by " + f + " as well. It rose under a ceiling, and " + f
+    + " times almost nothing is almost nothing.";
 }
 
 let running = false;
