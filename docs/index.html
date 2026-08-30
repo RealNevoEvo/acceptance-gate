@@ -119,8 +119,8 @@ mistaken.</p>
 <p>Her intelligence did not change between those two scenes, and neither did her capacity for
 effort. What changed was whether the correction was allowed in.</p>
 
-<p>The usual explanations do not fit. Stubbornness would have shown up in the morning too. Slowness
-is not the issue. And it is not two different people.</p>
+<p>Standard trait-based accounts cannot readily explain this contrast: general stubbornness or
+cognitive inflexibility would have impaired her response during surgery as well.</p>
 
 <h2>Three conditions</h2>
 
@@ -129,16 +129,19 @@ that each of them caps the result on its own. They are not stages you pass throu
 
 <div class="bedingung">
   <div class="name">Noticing<span class="nr">condition 1</span></div>
-  <div>The discrepancy has to arrive, and strongly enough to argue against what was expected.</div>
-  <div class="beleg">Well studied. Error signals in the brain, the ERN and the Pe.</div>
+  <div>The discrepancy between the incoming signal and the current mental model must be detected
+  with sufficient strength.</div>
+  <div class="beleg">Supported by established literature on neural error monitoring, including the
+  error-related negativity (ERN) and error positivity (Pe).</div>
 </div>
 
 <div class="bedingung mitte">
   <div class="name">Accepting<span class="nr">condition 2, the contribution</span></div>
-  <div>It has to be allowed to hold <em>of oneself</em>. Not understood in general terms, but in
-  this case, about this person, now.</div>
-  <div class="beleg">The building blocks exist: what self-worth is staked on, and what it costs to
-  be struck there. What is new is treating this as a condition of its own.</div>
+  <div>The detected discrepancy must be permitted to apply to oneself rather than dismissed or
+  rationalised away when it threatens contingent self-worth.</div>
+  <div class="beleg">Builds on research into contingencies of self-worth and self-defensive
+  cognition, formalising acceptance as an independent gate rather than a byproduct of
+  understanding.</div>
 </div>
 
 <div class="bedingung">
@@ -171,8 +174,8 @@ project consequences, and that quantity enters the third condition. It does not 
     <span class="wert" id="w-p">low</span>
     <button class="knopf" onclick="demonstrate()">Raise it slowly</button>
   </div>
-  <p class="klein" style="margin:4px 0 0">Both scenes get the same head: noticing and overriding are
-  identical on the left and the right. Only what is at stake differs.</p>
+  <p class="klein" style="margin:4px 0 0">Both conditions share identical parameters for detection and
+override capacity. They differ solely in the threat posed to self-worth (acceptance).</p>
 
   <div class="szenen">
     <div class="szene">
@@ -230,15 +233,17 @@ project consequences, and that quantity enters the third condition. It does not 
 <p>Her ability works in both scenes and by the same factor. That is not an approximation: the
 slider never touches acceptance, so it cancels when you divide one autonomy by the other.</p>
 
-<p>She still ends up high on one side and near the floor on the other. Nothing on the right is
-broken. That number rose too, by the same factor, but it rose under a ceiling.</p>
+<p>Despite this identical relative gain, the absolute capacity to act remains substantial in the
+operating theatre but negligible at home. High executive ability scales whatever signal passes
+through the acceptance gate, but it cannot overcome a gate that is essentially shut.</p>
 
 <div class="hinweis">
-<b>A caution about the constant factor.</b> It is easy to present it as the result, and an earlier
-version of this page did. It is not one. Take logarithms of a product and it becomes a sum, so a
-constant ratio survives any rescaling of the outcome and settles nothing. What the manuscript
-preregisters is the <b>absolute</b> gain: the distance between the two numbers at the bottom of a
-scene. On the left that distance is large. On the right it is almost nothing.
+<b>Methodological note on relative ratios vs. absolute gains:</b> A constant relative ratio across
+conditions is a mathematical property of any multiplicative formulation (which becomes additive
+under logarithmic transformation) and is preserved under monotonic rescaling. For empirical
+discrimination, the preregistered prediction concerns the <b>absolute</b> gain: the difference in
+actionable autonomy across ability levels is substantial under high acceptance, but vanishes when
+acceptance approaches zero.
 </div>
 
 <p>The testable consequence is about that absolute gain. A very able person whose self-worth is
@@ -250,7 +255,8 @@ study rather than a slider. The repository does not contain that rival yet.</p>
 
 <h2>The calculation</h2>
 
-<p>The core is a product of three numbers, so that none of them can stand in for another:</p>
+<p>The model defines behavioural autonomy as the product of the three component probabilities, ensuring
+that no single component can fully substitute for a deficiency in another:</p>
 
 <pre><span class="schl">from</span> math <span class="schl">import</span> exp
 
@@ -261,9 +267,8 @@ study rather than a slider. The repository does not contain that rival yet.</p>
     <span class="txt">"""How far a person can act against their strongest schema."""</span>
     <span class="schl">return</span> detection * acceptance * override</pre>
 
-<p>The case the manuscript works through is an able man with an excellent error detector and
-formidable modelling ability, meeting a criticism that lands exactly where his self-worth is
-staked:</p>
+<p>The worked example from the manuscript examines an individual with high detection and high override
+capacity confronted with feedback in a domain of high ego-threat:</p>
 
 <pre>&gt;&gt;&gt; round(autonomy(sigmoid(2), sigmoid(-3), sigmoid(2)), 4)
 0.0368
@@ -285,10 +290,11 @@ The one it leans on: where acceptance is low, the effect of forecasting depth sh
 a study of that size could detect. If it merely shrinks, the conditions are trading off and the
 architecture is wrong.</p>
 
-<p>Before any of that, something else has to hold, and it is easy to overlook. The three conditions
-must be measurable separately, without using the outcome to do it. If acceptance is recognised by
-the fact that someone changed their behaviour, nothing has been explained, only renamed. That is a
-question about measurement, and the manuscript treats it in an appendix of its own.</p>
+<p>A fundamental prerequisite for falsification is construct identifiability: detection, acceptance,
+and override must be operationalised and measured independently of the behavioural outcome itself.
+Inferring low acceptance post hoc solely from behavioral failure would render the framework
+tautological. The manuscript addresses this experimental separation in a dedicated measurement
+appendix.</p>
 
 <h2>Where this comes from</h2>
 

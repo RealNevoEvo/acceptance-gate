@@ -26,12 +26,13 @@ result on its own:
 A = detection · acceptance · override
 ```
 
-**Detection** is whether the discrepancy reaches you at all. **Override** is whether the
-new intention beats the practised one, and what that costs. Both are familiar; there is
-a literature on each.
+**Detection** represents the probability that an error or discrepancy is registered by monitoring
+mechanisms. **Override** represents the probability that executive control successfully suppresses
+the prepotent response, given the computational costs of control. Both components build on extensive
+experimental literature.
 
-**Acceptance** is whether the truth is allowed to be true *of you*. Not understood.
-Not conceded in general. Admitted, here, about yourself, now.
+**Acceptance** represents whether the registered discrepancy is integrated into self-evaluation
+rather than defensively rejected or rationalised when it conflicts with contingent self-worth.
 
 The constructs are established. What is claimed as new is the wiring: that acceptance is
 a condition in its own right, that it does not reduce to understanding, and that a
@@ -50,23 +51,20 @@ quantities change over a life, are the subject of the companion paper and are **
 here. There is no calibration, and there will be none: units are arbitrary throughout,
 and a number from this code should never be quoted as a measurement.
 
-There is also an [explainer page](https://realnevoevo.github.io/acceptance-gate/) for
-readers who would rather drag a slider than read a docstring.
+An interactive demonstration is available on the [explainer
+page](https://realnevoevo.github.io/acceptance-gate/).
 
 ## Why a product
 
-The three conditions are requirements. A surplus in one does not lift the cap another
-one sets. That is a strong claim, and it is the one worth attacking: if the data say the
-three trade off against each other, the model is wrong in the way it is meant to be
-capable of being wrong.
+The multiplicative formulation specifies that each condition is strictly necessary. If empirical
+evidence demonstrates continuous trade-offs or additive substitution among detection, acceptance,
+and override, the proposed architecture is falsified.
 
-**Where the disagreement with an additive account actually lives.** The obvious thing to
-show is the ratio: raise forecasting depth and every person gains the same factor,
-whatever their acceptance is doing. That is true here and easy to demonstrate, and it
-proves nothing at all. Take logarithms of a product and it turns additive, so a constant
-ratio survives any monotone rescaling of the outcome and licenses no inference about what
-is underneath. The manuscript spends a section on exactly this and preregisters something
-else: the **absolute** effect.
+**Distinguishing multiplicative from additive architectures.** In a product model, scaling the
+override capacity increases autonomy by an identical relative factor regardless of the baseline
+acceptance level. However, because constant multiplicative ratios are preserved under logarithmic
+and monotonic transformations, relative gains alone cannot discriminate between model classes. The
+discriminative empirical prediction therefore centers on the **absolute** effect.
 
 ```python
 >>> from acceptance_gate import depth_effect, override
@@ -80,9 +78,9 @@ else: the **absolute** effect.
 
 ```
 
-Three orders of magnitude in acceptance, three in the gain. Under an account where the
-conditions add up, a large ability compensates a small acceptance and this column stays
-flat.
+As baseline acceptance decreases across orders of magnitude, the absolute behavioural gain from high
+executive ability drops proportionally toward zero. Under an additive model, in contrast, executive
+ability would provide a constant absolute boost regardless of defensive resistance.
 
 Two honest caveats. First, the rival is not implemented here, so what you can run is one
 side of the disagreement; a logistic over a weighted sum of the three conditions belongs
@@ -95,8 +93,8 @@ repository yet.
 
 ## The worked case
 
-An able man with an excellent error detector and formidable modelling ability, meeting a
-criticism that strikes exactly where his self-worth is staked:
+The following scenario illustrates an individual with high error detection and substantial modelling
+capacity confronting feedback that directly threatens contingent self-worth:
 
 ```
 $ python -m acceptance_gate.vignettes
@@ -110,12 +108,13 @@ surgeon, 3pm, at home                     0.881  0.047  0.924   0.0386  acceptan
 quiet hint, settled routine               0.223  0.881  0.924   0.1813  detection
 ```
 
-His two great faculties multiplied a near-zero by 3.1. That is what a ceiling does, and
-it is the honest version of the claim: ability is not nothing here, it is simply
-multiplying whatever gets through.
+Even with strong detection and override capacities, the overall outcome is scaled by a factor of 3.1
+relative to baseline ability, yet remains constrained below 0.04. Cognitive ability scales the
+transmitted signal, but cannot bypass the bottleneck imposed by low acceptance.
 
-The surgeon is the same woman six hours apart. Her detection and her override are
-identical in both rows, because it is the same head. Only the threat differs.
+The surgeon vignette models the same individual across two situations: detection and override
+parameters remain identical, while the situation-specific threat to self-worth changes the
+acceptance probability.
 
 The first two rows are the manuscript's, to the digit. The surgeon is a scene from its
 introduction, told without numbers; her parameters were chosen here so the scene could
