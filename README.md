@@ -4,8 +4,7 @@
 correction at three in the afternoon. Nothing about her intelligence changed in
 between. This is a model of what did.**
 
-Companion code to *The Acceptance Gate: Three Necessary Conditions for the Capacity to
-Act Against One's Strongest Schema*. No dependencies, one equation, and the worked
+Companion code to *The Acceptance Gate: Three Necessary Conditions for Acting Deliberately on What One's Schemata Propose*. No dependencies, one equation, and the worked
 cases from the manuscript as executable tests.
 
 ```python

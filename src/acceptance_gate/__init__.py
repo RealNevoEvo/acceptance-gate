@@ -4,8 +4,7 @@
     >>> round(autonomy(sigmoid(2), sigmoid(-3), sigmoid(2)), 4)
     0.0368
 
-Companion code to *The Acceptance Gate: Three Necessary Conditions for the Capacity
-to Act Against One's Strongest Schema*.
+Companion code to *The Acceptance Gate: Three Necessary Conditions for Acting Deliberately on What One's Schemata Propose*.
 
 Units are arbitrary and illustrative. They demonstrate an ordering, not a measurement.
 """
